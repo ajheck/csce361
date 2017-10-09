@@ -7,16 +7,16 @@ using System.Web;
 
 namespace RoomQuery.Models
 {
-    public class Student
+    public class Professor
     {
         [Key]
-        public int StudentID { get; }
+        public int ProfessorID { get; }
         [Index(IsUnique = true)]
         public int Nuid { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public int PassHash { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool InSRC { get; set; }
-        public bool IsTA { get; set; }
-     }
 
+    }
 }
