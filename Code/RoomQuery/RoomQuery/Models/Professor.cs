@@ -11,12 +11,12 @@ namespace RoomQuery.Models
     {
         [Key]
         public int ProfessorID { get; }
-        [Index(IsUnique = true)]
+        [Index(IsUnique = true), Required]
         public int Nuid { get; set; }
+        public UInt64 PassHash { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
-        public int PassHash { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
+        
     }
 }
