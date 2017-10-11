@@ -10,10 +10,14 @@ namespace RoomQuery.Models
     public class Course
     {
         [Key]
-        public int CourseID { get; }
+        public int CourseID { get; set; }
         public virtual ICollection<Student> Roster { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(32)]
         [Index(IsUnique = true)]
         public string CourseNumber { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(128)]
         [Index(IsUnique = true)]
         public string CourseName { get; set; }
     }

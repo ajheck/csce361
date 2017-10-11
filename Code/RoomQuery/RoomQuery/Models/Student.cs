@@ -10,9 +10,12 @@ namespace RoomQuery.Models
     public class Student
     {
         [Key]
-        public int StudentID { get; }
+        public int StudentID { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(16)]
         [Index(IsUnique = true)]
-        public int Nuid { get; set; }
+        [NotMapped]
+        public string Nuid { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool InSRC { get; set; }

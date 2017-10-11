@@ -1,5 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using RoomQuery.Models;
+using System;
+
+using System.Linq;
 
 [assembly: OwinStartupAttribute(typeof(RoomQuery.Startup))]
 namespace RoomQuery

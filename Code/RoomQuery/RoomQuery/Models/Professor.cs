@@ -10,9 +10,11 @@ namespace RoomQuery.Models
     public class Professor
     {
         [Key]
-        public int ProfessorID { get; }
-        [Index(IsUnique = true), Required]
-        public int Nuid { get; set; }
+        public int ProfessorID { get; set; }
+        [Column(TypeName = "VARCHAR")]
+        [StringLength(16)]
+        [Index(IsUnique = true)]
+        public string Nuid { get; set; }
         public UInt64 PassHash { get; set; }
         public virtual ICollection<Course> Courses { get; set; }
         public string FirstName { get; set; }

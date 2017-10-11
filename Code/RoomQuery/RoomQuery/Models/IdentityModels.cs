@@ -20,10 +20,17 @@ namespace RoomQuery.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
-        {
+        { 
         }
+
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<OfficeHour> OfficeHours { get; set; }
+        public DbSet<Professor> Professors { get; set; }
+        public DbSet<SRCTimestamp> Timestamps { get; set; }
 
         public static ApplicationDbContext Create()
         {
