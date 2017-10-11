@@ -155,3 +155,5 @@ C:\git\csce361\Code\RoomQuery\RoomQuery\bin\RoomQuery.dll
 C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.dll
 C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.Migrations.InitModels.resources
 C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.csproj.GenerateResource.Cache
+C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.csprojResolveAssemblyReference.cache
+C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.Migrations.FixStudentID.resources

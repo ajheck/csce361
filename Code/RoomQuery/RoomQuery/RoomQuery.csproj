@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201710110258134_InitModels.Designer.cs">
       <DependentUpon>201710110258134_InitModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710111626514_FixStudentID.cs" />
+    <Compile Include="Migrations\201710111626514_FixStudentID.Designer.cs">
+      <DependentUpon>201710111626514_FixStudentID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Course.cs" />
@@ -324,6 +328,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710110258134_InitModels.resx">
       <DependentUpon>201710110258134_InitModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111626514_FixStudentID.resx">
+      <DependentUpon>201710111626514_FixStudentID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
