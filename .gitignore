@@ -1,2 +1,4 @@
 *.mfd
 *.lfd
+/Code/RoomQuery/RoomQuery/App_Data/*.ldf
+/Code/RoomQuery/RoomQuery/App_Data/*.mdf
