@@ -3,7 +3,7 @@ namespace RoomQuery.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitModels : DbMigration
+    public partial class InitDatabase : DbMigration
     {
         public override void Up()
         {
@@ -19,7 +19,6 @@ namespace RoomQuery.Migrations
                 .PrimaryKey(t => t.CourseID)
                 .ForeignKey("dbo.Professors", t => t.Professor_ProfessorID)
                 .Index(t => t.CourseNumber, unique: true)
-                .Index(t => t.CourseName, unique: true)
                 .Index(t => t.Professor_ProfessorID);
             
             CreateTable(
@@ -27,6 +26,7 @@ namespace RoomQuery.Migrations
                 c => new
                     {
                         StudentID = c.Int(nullable: false, identity: true),
+                        Nuid = c.String(maxLength: 16, unicode: false),
                         FirstName = c.String(),
                         LastName = c.String(),
                         InSRC = c.Boolean(nullable: false),
@@ -62,8 +62,7 @@ namespace RoomQuery.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                     })
-                .PrimaryKey(t => t.ProfessorID)
-                .Index(t => t.Nuid, unique: true);
+                .PrimaryKey(t => t.ProfessorID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -94,6 +93,7 @@ namespace RoomQuery.Migrations
                     {
                         TimeStampID = c.Int(nullable: false, identity: true),
                         WasCheckIn = c.Boolean(nullable: false),
+                        Stamp = c.DateTime(nullable: false),
                         Student_StudentID = c.Int(),
                     })
                 .PrimaryKey(t => t.TimeStampID)
@@ -165,12 +165,10 @@ namespace RoomQuery.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Professors", new[] { "Nuid" });
             DropIndex("dbo.OfficeHours", new[] { "Student_StudentID" });
             DropIndex("dbo.OfficeHours", new[] { "Course_CourseID" });
             DropIndex("dbo.Students", new[] { "Course_CourseID" });
             DropIndex("dbo.Courses", new[] { "Professor_ProfessorID" });
-            DropIndex("dbo.Courses", new[] { "CourseName" });
             DropIndex("dbo.Courses", new[] { "CourseNumber" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

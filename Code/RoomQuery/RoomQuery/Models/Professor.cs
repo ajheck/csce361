@@ -13,7 +13,6 @@ namespace RoomQuery.Models
         public int ProfessorID { get; set; }
         [Column(TypeName = "VARCHAR")]
         [StringLength(16)]
-        [Index(IsUnique = true)]
         public string Nuid { get; set; }
         public UInt64 PassHash { get; set; }
         public virtual ICollection<Course> Courses { get; set; }

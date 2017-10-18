@@ -12,6 +12,6 @@ namespace RoomQuery.Models
         public int TimeStampID { get; set; }
         public virtual Student Student { get; set; }
         public virtual bool WasCheckIn { get; set; }
-        public DateTime Stamp { get; }
+        public DateTime Stamp { get; set; }
     }
 }

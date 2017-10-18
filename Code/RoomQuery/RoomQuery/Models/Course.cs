@@ -18,7 +18,6 @@ namespace RoomQuery.Models
         public string CourseNumber { get; set; }
         [Column(TypeName = "VARCHAR")]
         [StringLength(128)]
-        [Index(IsUnique = true)]
         public string CourseName { get; set; }
     }
 }

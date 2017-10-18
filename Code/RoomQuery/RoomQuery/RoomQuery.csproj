@@ -219,13 +219,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710110258134_InitModels.cs" />
-    <Compile Include="Migrations\201710110258134_InitModels.Designer.cs">
-      <DependentUpon>201710110258134_InitModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710111626514_FixStudentID.cs" />
-    <Compile Include="Migrations\201710111626514_FixStudentID.Designer.cs">
-      <DependentUpon>201710111626514_FixStudentID.cs</DependentUpon>
+    <Compile Include="Migrations\201710181611361_InitDatabase.cs" />
+    <Compile Include="Migrations\201710181611361_InitDatabase.Designer.cs">
+      <DependentUpon>201710181611361_InitDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -326,11 +322,8 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710110258134_InitModels.resx">
-      <DependentUpon>201710110258134_InitModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710111626514_FixStudentID.resx">
-      <DependentUpon>201710111626514_FixStudentID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710181611361_InitDatabase.resx">
+      <DependentUpon>201710181611361_InitDatabase.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
