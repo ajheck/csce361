@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RoomQuery.Models;
+using RoomQuery.WebAppBuisnessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,15 @@ namespace RoomQuery.Controllers
 {
     public class HomeController : Controller
     {
+        private HomeService HomeService = new HomeService();
+
         public ActionResult Index()
         {
-            return View();
+            IndexViewModel ViewModel = new IndexViewModel();
+
+            ViewModel.Population = HomeService.GetPopulation();
+
+            return View(ViewModel);
         }
 
         public ActionResult About()

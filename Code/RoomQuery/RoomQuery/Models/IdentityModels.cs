@@ -31,10 +31,17 @@ namespace RoomQuery.Models
         public DbSet<OfficeHour> OfficeHours { get; set; }
         public DbSet<Professor> Professors { get; set; }
         public DbSet<SRCTimestamp> Timestamps { get; set; }
+        private static bool isFirstCall = true;
+        private static ApplicationDbContext singleton;
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            if (isFirstCall)
+            {
+                singleton = new ApplicationDbContext();
+                isFirstCall = false;
+            }
+            return singleton;
         }
     }
 }

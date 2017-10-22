@@ -5,7 +5,7 @@ using Microsoft.Owin.Security;
 
 namespace RoomQuery.Models
 {
-    public class IndexViewModel
+    public class OldIndexViewModel
     {
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
