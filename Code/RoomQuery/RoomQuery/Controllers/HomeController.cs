@@ -10,13 +10,15 @@ namespace RoomQuery.Controllers
 {
     public class HomeController : Controller
     {
-        private HomeService HomeService = new HomeService();
+        private static HomeService HomeService = new HomeService();
 
         public ActionResult Index()
         {
             IndexViewModel ViewModel = new IndexViewModel();
 
             ViewModel.Population = HomeService.GetPopulation();
+            ViewModel.ActiveOfficeHours = HomeService.GetActiveOfficeHours().ToList();
+            ViewModel.WeeklyOfficeHours = HomeService.GetOfficeHours().ToList();
 
             return View(ViewModel);
         }

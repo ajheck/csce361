@@ -12,10 +12,28 @@
 </div>
 
 <div>
-    @{ 
-        @Model.Population
-    }
+    The current SRC population is: @Model.Population
 </div>
+
+<div>
+    The current TA population is: @Model.ActiveOfficeHours.Count()
+</div>
+
+<h4>
+    The Current TAs who are in are:
+</h4>
+@foreach(var hour in Model.ActiveOfficeHours)
+{
+    <p>
+        Course: @hour.Course.CourseNumber
+    </p>
+    <p>
+        Hours: @hour.Start to @hour.End
+    </p>
+    <p>
+        TA: @hour.Student.FirstName @hour.Student.LastName
+    </p>
+}
 
 @*<div class="row">
     <div class="col-md-4">

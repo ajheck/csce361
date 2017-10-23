@@ -16,9 +16,9 @@ namespace RoomQuery.WebAppBuisnessLayer
         /*
          * Return all Students in the database
          */
-        public IEnumerable<Student> GetAllStudents()
+        public IEnumerable<Student> GetStudents()
         {
-            return Context.Students;
+            return Context.Students.Where(x => x != null);
         }
 
         /*
@@ -26,7 +26,7 @@ namespace RoomQuery.WebAppBuisnessLayer
          */
         public IEnumerable<Student> GetCurrentStudents()
         {
-            return Context.Students.Where(x => x.InSRC == true);
+            return this.GetStudents().Where(x => x.InSRC == true);
         }
 
         /*
@@ -42,24 +42,32 @@ namespace RoomQuery.WebAppBuisnessLayer
          */
         public IEnumerable<Student> GetTAs()
         {
-            return Context.Students.Where(x => x.IsTA == true);
+            return this.GetStudents().Where(x => x.IsTA == true);
         }
 
         /*
          * Return all students who are in the SRC and are TAs and are curreently hosting office hours
          */
-        public IEnumerable<Student> GetCurrentTAs()
+        public IEnumerable<Student> GetActiveTAs()
         {
             // Get students who are  in SRC who are TAs
-            var possibleActiveTAs = Context.Students.Where(x => x.IsTA == true && x.InSRC == true);
+            var possibleActiveTAs = this.GetTAs().Where(x => x.InSRC == true);
 
-            // Get ofccie hours which are happening right now
-            var currentOfficeHours = Context.OfficeHours.Where(x => DateTime.Compare(x.Start, DateTime.Now) > 0 && DateTime.Compare(x.Start, DateTime.Now) < 0);
+            // Get office hours which are happening right now
+            var currentOfficeHours = this.GetCurrentOfficeHours();
 
             // For each entry x in possibleActiveTas, check if currentOfficeHours has a corresponding Student
-            var currentTAs = possibleActiveTAs.Where(x => currentOfficeHours.Select(y => y.Student.StudentID).Contains(x.StudentID));
+            var activeTAs = possibleActiveTAs.Where(x => currentOfficeHours.Select(y => y.Student.StudentID).Contains(x.StudentID));
 
-            return currentTAs;
+            return activeTAs;
+        }
+
+        /*
+         * Get all entries of office hours
+         */
+        public IEnumerable<OfficeHour> GetOfficeHours()
+        {
+            return Context.OfficeHours.Where(x => x != null);
         }
 
         /*
@@ -67,15 +75,31 @@ namespace RoomQuery.WebAppBuisnessLayer
          */
         public IEnumerable<OfficeHour> GetOfficeHours(Student TA)
         {
-            return Context.OfficeHours.Where(x => x.Student.StudentID == TA.StudentID);
+            return this.GetOfficeHours().Where(x => x.Student.StudentID == TA.StudentID);
+        }
+        
+        /*
+         * Return all office hours that are occuring right now
+         */
+        public IEnumerable<OfficeHour> GetCurrentOfficeHours()
+        {
+            return this.GetOfficeHours().Where(x => x.Start < DateTime.Now && x.End > DateTime.Now);
         }
 
         /*
          * For a given Student TA, return their current office hours
          */
-         public IEnumerable<OfficeHour> GetCurrentOfficeHours(Student TA)
+        public IEnumerable<OfficeHour> GetCurrentOfficeHours(Student TA)
         {
-            return this.GetOfficeHours(TA).Where(x => DateTime.Compare(x.Start, DateTime.Now) > 0 && DateTime.Compare(x.Start, DateTime.Now) < 0);
+            return this.GetCurrentOfficeHours().Where(x => x.Student.StudentID == TA.StudentID);
+        }
+
+        /*
+         * Return all office hours which are currently happneing and that have a TA present
+         */
+        public IEnumerable<OfficeHour> GetActiveOfficeHours()
+        {
+            return this.GetCurrentOfficeHours().Where(x => x.Student.InSRC == true);
         }
 
     }
