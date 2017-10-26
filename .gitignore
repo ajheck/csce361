@@ -2,6 +2,4 @@
 *.lfd
 /Code/RoomQuery/RoomQuery/App_Data/*.ldf
 /Code/RoomQuery/RoomQuery/App_Data/*.mdf
-/Code/RoomQuery/RoomQuery/Migrations/201710240157125_InitDatabase.Designer.cs
-/Code/RoomQuery/RoomQuery/Migrations/201710240157125_InitDatabase.cs
-/Code/RoomQuery/RoomQuery/Migrations/201710240157125_InitDatabase.resx
+/Code/RoomQuery/RoomQuery.Tests/obj/Debug
