@@ -101,6 +101,5 @@ namespace RoomQuery.WebAppBuisnessLayer
         {
             return this.GetCurrentOfficeHours().Where(x => x.Student.InSRC == true);
         }
-
     }
 }

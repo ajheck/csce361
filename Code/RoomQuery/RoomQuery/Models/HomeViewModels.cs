@@ -17,4 +17,9 @@ namespace RoomQuery.Models
         [DisplayName("WeeklyOfficeHours")]
         public List<OfficeHour> WeeklyOfficeHours { get; set; }
     }
+
+    public class HomeViewModel
+    {
+        public int RoomPopulation { get; set; }
+    }
 }
