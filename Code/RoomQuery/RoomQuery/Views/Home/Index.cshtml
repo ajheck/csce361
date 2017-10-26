@@ -5,14 +5,17 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p>
-        <a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>
-    </p>
+@*@<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p>
+            <a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a>
+        </p>
+    </div>
+*@
+<div class="page-header">
+    <h1><font size="50"><b>Room Query</b></font></h1>
 </div>
-
 <div>
     The current SRC population is: @Model.Population
 </div>
@@ -21,40 +24,108 @@
     The current TA population is: @Model.ActiveOfficeHours.Count()
 </div>
 
-<h4>
-    The Current TAs who are in are:
-</h4>
-@foreach(var hour in Model.ActiveOfficeHours)
-{
-    <p>
-        Course: @hour.Course.CourseNumber
-    </p>
-    <p>
-        Hours: @hour.Start to @hour.End
-    </p>
-    <p>
-        TA: @hour.Student.FirstName @hour.Student.LastName
-    </p>
-}
+
+<body>
+    @{if (Model.ActiveOfficeHours.Count() == 0)
+        {
+            <font size ="4"><b>TAs currently in the SRC</b></font>
+        <div>
+            There are no TAs currently in the SRC
+        </div>
+        }
+        else
+        {
+        <table border="2" style='border-collapse: collapse; border-spacing: 10px; padding-left: 10px;'>
+            <colgroup>
+                <col span="1" style="width: 100px;">
+                <col span="1" style="width: 100px;">
+                <col span="1" style="width: 85px;">
+                <col span="1" style="width: 150px;">
+            </colgroup>
+            <font size="4"><b>TAs currently in the SRC</b></font>
+            <caption class="text-center" style="font-weight: bold; font-size: 120%; color: black;">TAs currently in the SRC</caption>
+            <tr>
+                <th class="text-center">Course</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Day</th>
+                <th class="text-center">Time</th>
+            </tr>
+            @foreach (var hour in Model.ActiveOfficeHours)
+                {
+                    string[] start = @hour.Start.ToString().Split(' ');
+                    string[] end = @hour.End.ToString().Split(' ');
+                    string[] startTime = @start[1].Split(':');
+                    string[] endTime = @end[1].Split(':');
+
+                <tr style="text-align:center">
+                    <td>@hour.Course.CourseNumber</td>
+                    <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                    <td>@hour.Start.DayOfWeek</td>
+                    <td>@startTime[0]:@startTime[1] @start[2] - @endTime[0]:@endTime[1] @end[2]</td>
+                </tr>
+            }
+        </table>
+        }
+    }
+    
+
+
+
+
+
+
+
+    <table border="2" style='border-collapse: collapse; border-spacing: 10px; padding-left: 10px;'>
+        <colgroup>
+            <col span="1" style="width: 100px;">
+            <col span="1" style="width: 100px;">
+            <col span="1" style="width: 85px;">
+            <col span="1" style="width: 150px;">
+        </colgroup>
+        <font size="4"><b>TA schedule for the week</b></font>
+        <!--<caption class="text-center" style="font-weight: bold; font-size: 120%; color: black;">TA schedule for the week</caption>-->
+        <tr>
+            <th class="text-center">Course</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Day</th>
+            <th class="text-center">Time</th>
+        </tr>
+            @foreach (var hour in Model.WeeklyOfficeHours)
+            {
+                string[] start = @hour.Start.ToString().Split(' ');
+                string[] end = @hour.End.ToString().Split(' ');
+                string[] startTime = @start[1].Split(':');
+                string[] endTime = @end[1].Split(':');
+
+                <tr style="text-align:center">
+                    <td>@hour.Course.CourseNumber</td>
+                    <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                    <td>@hour.Start.DayOfWeek</td>
+                    <td>@startTime[0]:@startTime[1] @start[2] - @endTime[0]:@endTime[1] @end[2]</td>
+                </tr>
+            }
+    </table>
+</body>
+
 
 @*<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@
