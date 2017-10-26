@@ -15,6 +15,8 @@ namespace RoomQuery.Controllers
             IndexViewModel ViewModel = new IndexViewModel();
             HomeService HomeService = new HomeService();
 
+            HomeService.ScrubStaleEntries();
+
             ViewModel.Population = HomeService.GetPopulation();
             ViewModel.ActiveOfficeHours = HomeService.GetActiveOfficeHours().ToList();
             ViewModel.WeeklyOfficeHours = HomeService.GetOfficeHours().ToList();
