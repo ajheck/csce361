@@ -20,7 +20,8 @@ namespace RoomQuery.Models
 
     public class GraphViewModel
     {
-        public List<int> TodaysPopulation { get; set; }
-        public List<int> HistoricalPopulation { get; set; }
+        public int TodaysPopulation { get; set; }
+        public int HistoricalPopulation { get; set; }
+        public string GraphLabel { get; set; }
     }
 }

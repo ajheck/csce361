@@ -5,7 +5,7 @@
     Chart.defaults.global.defaultFontColor = '#777';
 
     var studPopChart = {
-        labels:["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM"],
+        labels:[],
         datasets:
         [
             {
@@ -30,23 +30,19 @@
 		    }
         ],
         options: {
-            title:
-            {
+            title: {
                 display: true,
                 text: 'Student Population in the SRC',
                 fontSize: 25
             },
-            legend:
-            {
+            legend: {
                 display: true,
                 position: 'right',
-                labels:
-                {
+                labels: {
                     fontColor: '#000'
                 }
             },
-            scales:
-            {
+            scales: {
                 yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { min: 0, max: 50 } }]
             },
             layout: {
@@ -65,14 +61,17 @@
 
     $.getJSON("/Home/GetData/", function (data) {
         $.each(data, function (i, item) {
-            studPopChart.datasets[0].data.push(item.TodaysPopulation);
-            studPopChart.datasets[1].data.push(item.HistoricalPopulation);
+            studPopChart.datasets[0].data.push(data.length);
+           // studPopChart.labels.push(item.label);
         })
+
+        studPopChart.labels.push("9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM");
         var ctx = document.getElementById("myChart").getContext("2d");
 
         var myLineChart = new Chart(ctx,
             {
                 type: 'line',
-                data: studPopChart,
+                data: studPopChart
             });
     });
+

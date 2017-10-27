@@ -202,7 +202,7 @@ namespace RoomQuery.WebAppBuisnessLayer
 
             foreach(Student s in this.GetStudents().ToList())
             {
-                var stamps = this.Context.Timestamps.Where(x => x.Student.StudentID == s.StudentID).OrderByDescending(x => x.Stamp).ToList();
+                var stamps = this.Context.Timestamps.Where(x => x.Student.StudentID == s.StudentID && x.Stamp <= DateTime.Now).OrderByDescending(x => x.Stamp).ToList();
                 if(stamps.Count > 0)
                 {
                     var latest = stamps.First();

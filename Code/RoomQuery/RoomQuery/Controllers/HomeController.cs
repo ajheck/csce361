@@ -43,14 +43,21 @@ namespace RoomQuery.Controllers
         {
             List<GraphViewModel> Home = new List<GraphViewModel>();
 
-            GraphViewModel GraphViewModel = new GraphViewModel();
             HomeService HomeService = new HomeService();
 
-            GraphViewModel.TodaysPopulation = HomeService.GetTodaysPopulation();
-            GraphViewModel.HistoricalPopulation = HomeService.GetHistoricalPopulation();
-            Home.Add(GraphViewModel);
+            var TodayPop = HomeService.GetTodaysPopulation();
+            var HistPop = HomeService.GetHistoricalPopulation();
 
-            return Content(JsonConvert.SerializeObject(Home), "application/json");
+            foreach (var Point in HistPop)
+            {
+                GraphViewModel AviewModel = new GraphViewModel();
+                AviewModel.HistoricalPopulation = Point;
+                //AviewModel.GraphLabel = "a";
+                Home.Add(AviewModel);
+            }
+
+            var temp = Content(JsonConvert.SerializeObject(Home), "application/json");
+            return temp;
         }
     }
 }
