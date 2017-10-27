@@ -117,8 +117,18 @@ namespace RoomQuery.Migrations
             {
                 Student = context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault(),
                 Course = context.Courses.Where(x => x.CourseNumber == "CSCE 155A").FirstOrDefault(),
-                Start = DateTime.Now,
-                End = DateTime.Now.AddHours(3.0)
+                Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0).AddDays(7),
+                End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0).AddHours(2).AddDays(7)
+            };
+
+            context.OfficeHours.Add(hours);
+
+            hours = new OfficeHour
+            {
+                Student = context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault(),
+                Course = context.Courses.Where(x => x.CourseNumber == "CSCE 155A").FirstOrDefault(),
+                Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(2),
+                End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(2).AddHours(2)
             };
 
             context.OfficeHours.Add(hours);
@@ -130,6 +140,25 @@ namespace RoomQuery.Migrations
                 Course = context.Courses.Where(x => x.CourseNumber == "CSCE 230").FirstOrDefault(),
                 Start = DateTime.Now.AddHours(3.0),
                 End = DateTime.Now.AddHours(6.0)
+            };
+
+            context.OfficeHours.Add(hours);
+
+            //Hannah's office hours
+            hours = new OfficeHour
+            {
+                Student = context.Students.Where(x => x.Nuid == "88888888").FirstOrDefault(),
+                Course = context.Courses.Where(x => x.CourseNumber == "CSCE 155A").FirstOrDefault(),
+                Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(3),
+                End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(3).AddHours(2)
+            };
+
+            context.OfficeHours.Add(hours); hours = new OfficeHour
+            {
+                Student = context.Students.Where(x => x.Nuid == "88888888").FirstOrDefault(),
+                Course = context.Courses.Where(x => x.CourseNumber == "CSCE 230").FirstOrDefault(),
+                Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(1),
+                End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0).AddDays(1).AddHours(2)
             };
 
             context.OfficeHours.Add(hours);

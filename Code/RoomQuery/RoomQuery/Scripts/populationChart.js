@@ -8,24 +8,24 @@
         datasets:
         [
             {
-                label:'Student Population',
-                data:[],
-		        fill: false,
-                backgroundColor:'red',
-                borderWidth:3,
-                borderColor:'#FF000',
-                hoverBorderWidth:3,
-                hoverBorderColor:'#000'
+                label:'Todays Usage',
+                data: [],
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
             },
 		    {
-                label:'Student Population',
-                data:[],
-		        fill: false,
-                backgroundColor:'blue',
-                borderWidth:3,
-                borderColor:'#000FF',
-                hoverBorderWidth:3,
-                hoverBorderColor:'#000'
+                label:'Typical Usage',
+                data: [],
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
 		    }
         ],
         options: {
@@ -34,13 +34,7 @@
                 text: 'Student Population in the SRC',
                 fontSize: 25
             },
-            legend: {
-                display: true,
-                position: 'right',
-                labels: {
-                    fontColor: '#000'
-                }
-            },
+            multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>",
             scales: {
                 yAxes: [{
                     id: 'y-axis-1',

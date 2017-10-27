@@ -15,74 +15,73 @@
 
 <div>
     <h1><font size="50"><b>Room Query</b></font></h1>
-
 </div>
+
 <body>
     <div class="row">
         <div class="col-lg-7">
             <canvas id="myChart"></canvas>
+            <div class="col-lg-12">
+                <font size="4">There are currently @Model.Population students in the SRC.</font>
+            </div>
         </div>
-
         <div class="col-lg-5">
-
-    @{if (Model.ActiveOfficeHours.Count() == 0)
-        {
-            <p><font size="4"><b>There are no TAs currently in the SRC</b></font></p>
-        }
-        else
-        {
-            <font size="4"><b>Current Office Hours</b></font>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>Name</th>
-                        <th>Day</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var hour in Model.ActiveOfficeHours)
-                    {
+            @if (Model.ActiveOfficeHours.Count() == 0)
+            {
+                <p><font size="4"><b>There are no TAs currently in the SRC</b></font></p>
+            }
+            else
+            {
+                <font size="4"><b>Current Office Hours</b></font>
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td>@hour.Course.CourseNumber</td>
-                            <td>@hour.Student.FirstName @hour.Student.LastName</td>
-                            <td>@hour.Start.DayOfWeek</td>
-                            <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
+                            <th>Course</th>
+                            <th>Name</th>
+                            <th>Day</th>
+                            <th>Time</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
-    }
-
+                    </thead>
+                    <tbody>
+                        @foreach (var hour in Model.ActiveOfficeHours)
+                        {
+                            <tr>
+                                <td>@hour.Course.CourseNumber</td>
+                                <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                                <td>@hour.Start.DayOfWeek</td>
+                                <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
             <font size="4"><b>Weekly Office Hours</b></font>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Course</th>
-                        <th>Name</th>
-                        <th>Day</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var hour in Model.WeeklyOfficeHours)
-                    {
-                        <tr>
-                            <td>@hour.Course.CourseNumber</td>
-                            <td>@hour.Student.FirstName @hour.Student.LastName</td>
-                            <td>@hour.Start.DayOfWeek</td>
-                            <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <font size="4">There are currently @Model.Population students in the SRC.</font>
+
+            @foreach (var currentCourse in Model.WeeklyOfficeHours.Select(x => x.Course).GroupBy(y => y.CourseID).Select(z => z.First()))
+            {
+                <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#@currentCourse.CourseID">@currentCourse.CourseNumber</button>
+                <div id="@currentCourse.CourseID" class="collapse">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var hour in Model.WeeklyOfficeHours.Where(x => x.Course.CourseID == currentCourse.CourseID))
+                            {
+                                <tr>
+                                    <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                                    <td>@hour.Start.DayOfWeek</td>
+                                    <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     </div>
 </body>

@@ -86,8 +86,6 @@ namespace RoomQuery.WebAppBuisnessLayer
                 periodStart = periodStart.AddHours(1.0);
             }
 
-            result.Add(this.GetPopulation());
-
             return result;
         }
 
@@ -175,6 +173,23 @@ namespace RoomQuery.WebAppBuisnessLayer
             return this.GetCurrentOfficeHours().Where(x => x.Student.InSRC == true);
         }
 
+        public void CheckOutStudent(Student s)
+        {
+            var newTimestamp = new SRCTimestamp();
+
+            newTimestamp.Stamp = DateTime.Now;
+            newTimestamp.Student = s;
+            newTimestamp.WasCheckIn = false;
+
+            this.Context.Timestamps.Add(newTimestamp);
+
+            s.InSRC = false;
+
+            this.Context.Students.FirstOrDefault(x => x.StudentID == s.StudentID).InSRC = false;
+
+            this.Context.SaveChanges();
+        }
+
         public void ScrubStaleEntries()
         {
             var fiveHoursAgo = DateTime.Now.AddHours(-5.0);
@@ -184,19 +199,15 @@ namespace RoomQuery.WebAppBuisnessLayer
                 var stamps = this.Context.Timestamps.Where(x => x.Student.StudentID == s.StudentID).Select(x => x.Stamp);
                 if (stamps.Max() <= fiveHoursAgo)
                 {
-                    var newTimestamp = new SRCTimestamp();
+                    this.CheckOutStudent(s);
+                }
+            }
 
-                    newTimestamp.Stamp = DateTime.Now;
-                    newTimestamp.Student = s;
-                    newTimestamp.WasCheckIn = false;
-
-                    this.Context.Timestamps.Add(newTimestamp);
-
-                    s.InSRC = false;
-
-                    this.Context.Students.FirstOrDefault(x => x.StudentID == s.StudentID).InSRC = false;
-
-                    this.Context.SaveChanges();
+            if(DateTime.Now > new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 19, 0, 0))
+            {
+                foreach (Student s in this.GetCurrentStudents().ToList())
+                {
+                    this.CheckOutStudent(s);
                 }
             }
 
@@ -209,6 +220,8 @@ namespace RoomQuery.WebAppBuisnessLayer
                     this.GetStudents().First(x => x.StudentID == s.StudentID).InSRC = latest.WasCheckIn;
                 }
             }
+
+            this.Context.SaveChanges();
 
         }
     }
