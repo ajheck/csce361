@@ -21,6 +21,76 @@ namespace RoomQuery.WebAppBuisnessLayer
             return Context.Students.Where(x => x != null);
         }
 
+        public List<int> GetHistoricalPopulation()
+        {
+            List<int> result = new List<int>();
+            int popCounter = 0;
+            DateTime periodStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            periodStart = periodStart.AddDays(-7.0);
+            DateTime periodEnd = periodStart.AddHours(9.0);
+
+            var historicalStamps = this.Context.Timestamps.Where(x => x.Stamp >= periodStart && x.Stamp <= periodEnd).ToList();
+
+            while (periodStart.Hour < 18)
+            {
+                foreach (SRCTimestamp x in historicalStamps)
+                {
+                    if (x.Stamp.Hour == periodStart.Hour && x.WasCheckIn)
+                    {
+                        popCounter++;
+                    }
+                    else if (x.Stamp.Hour == periodStart.Hour && !x.WasCheckIn)
+                    {
+                        popCounter--;
+                    }
+                }
+
+                result.Add(popCounter);
+
+                periodStart = periodStart.AddHours(1.0);
+            }
+
+            result.Add(0);
+
+            return result;
+        }
+
+        /*
+        * Returns today's population
+        */
+        public List<int> GetTodaysPopulation()
+        {
+            List<int> result = new List<int>();
+            int popCounter = 0;
+            DateTime periodStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+           
+
+            var todaysStamps = this.Context.Timestamps.Where(x => x.Stamp >= periodStart).ToList();
+
+            while (periodStart.Hour < DateTime.Now.Hour && periodStart.Hour < 18)
+            {
+                foreach(SRCTimestamp x in todaysStamps)
+                { 
+                    if(x.Stamp.Hour == periodStart.Hour && x.WasCheckIn)
+                    {
+                        popCounter++;
+                    }
+                    else if(x.Stamp.Hour == periodStart.Hour && !x.WasCheckIn)
+                    {
+                        popCounter--;
+                    }
+                }
+
+                result.Add(popCounter);
+
+                periodStart = periodStart.AddHours(1.0);
+            }
+
+            result.Add(this.GetPopulation());
+
+            return result;
+        }
+
         /*
          * Return all Students who are checked in in the database
          */
@@ -104,6 +174,7 @@ namespace RoomQuery.WebAppBuisnessLayer
         {
             return this.GetCurrentOfficeHours().Where(x => x.Student.InSRC == true);
         }
+
         public void ScrubStaleEntries()
         {
             var fiveHoursAgo = DateTime.Now.AddHours(-5.0);
@@ -126,13 +197,19 @@ namespace RoomQuery.WebAppBuisnessLayer
                     this.Context.Students.FirstOrDefault(x => x.StudentID == s.StudentID).InSRC = false;
 
                     this.Context.SaveChanges();
-
                 }
             }
 
+            foreach(Student s in this.GetStudents().ToList())
+            {
+                var stamps = this.Context.Timestamps.Where(x => x.Student.StudentID == s.StudentID).OrderByDescending(x => x.Stamp).ToList();
+                if(stamps.Count > 0)
+                {
+                    var latest = stamps.First();
+                    this.GetStudents().First(x => x.StudentID == s.StudentID).InSRC = latest.WasCheckIn;
+                }
+            }
 
         }
-
     }
-
 }

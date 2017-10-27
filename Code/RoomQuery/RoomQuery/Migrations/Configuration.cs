@@ -173,6 +173,60 @@ namespace RoomQuery.Migrations
 
             context.SaveChanges();
 
+            //Create realistic coming and goings for students of 230 for today
+            DateTime checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
+            {
+                SRCTimestamp newStamp = new SRCTimestamp();
+                newStamp.Student = s;
+                newStamp.WasCheckIn = true;
+                newStamp.Stamp = checkinTime;
+
+                context.Timestamps.Add(newStamp);
+
+                context.SaveChanges();
+
+                DateTime checkoutTime = checkinTime;
+                checkoutTime = checkoutTime.AddHours(.75);
+
+                newStamp.WasCheckIn = false;
+                newStamp.Stamp = checkoutTime;
+
+                context.Timestamps.Add(newStamp);
+
+                context.SaveChanges();
+
+                checkinTime = checkinTime.AddHours(.33);
+            }
+
+            //Create realistic coming and goings for students of 230 for lastWeek
+            checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            checkinTime = checkinTime.AddDays(-7.0);
+
+            foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
+            {
+                SRCTimestamp newStamp = new SRCTimestamp();
+                newStamp.Student = s;
+                newStamp.WasCheckIn = true;
+                newStamp.Stamp = checkinTime;
+
+                context.Timestamps.Add(newStamp);
+
+                context.SaveChanges();
+
+                DateTime checkoutTime = checkinTime;
+                checkoutTime = checkoutTime.AddHours(1.5);
+
+                newStamp.WasCheckIn = false;
+                newStamp.Stamp = checkoutTime;
+
+                context.Timestamps.Add(newStamp);
+
+                context.SaveChanges();
+
+                checkinTime = checkinTime.AddHours(.66);
+            }
+
             /* ------------------------------- Professors ------------------------------- */
 
             /*

@@ -18,8 +18,9 @@ namespace RoomQuery.Models
         public List<OfficeHour> WeeklyOfficeHours { get; set; }
     }
 
-    public class HomeViewModel
+    public class GraphViewModel
     {
-        public int RoomPopulation { get; set; }
+        public List<int> TodaysPopulation { get; set; }
+        public List<int> HistoricalPopulation { get; set; }
     }
 }

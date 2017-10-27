@@ -5,7 +5,7 @@
     Chart.defaults.global.defaultFontColor = '#777';
 
     var studPopChart = {
-        labels:[],
+        labels:["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM"],
         datasets:
         [
             {
@@ -65,15 +65,8 @@
 
     $.getJSON("/Home/GetData/", function (data) {
         $.each(data, function (i, item) {
-            studPopChart.datasets[0].data.push(item.RoomPopulation);
-            studPopChart.datasets[0].data.push(16);
-            studPopChart.datasets[0].data.push(12);
-
-
-            studPopChart.labels.push("First");
-            studPopChart.labels.push("Second");
-            studPopChart.labels.push("Third");
-
+            studPopChart.datasets[0].data.push(item.TodaysPopulation);
+            studPopChart.datasets[1].data.push(item.HistoricalPopulation);
         })
         var ctx = document.getElementById("myChart").getContext("2d");
 

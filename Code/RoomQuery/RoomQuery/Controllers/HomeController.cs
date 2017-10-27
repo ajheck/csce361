@@ -41,13 +41,14 @@ namespace RoomQuery.Controllers
 
         public ContentResult GetData()
         {
-            List<HomeViewModel> Home = new List<HomeViewModel>();
+            List<GraphViewModel> Home = new List<GraphViewModel>();
 
-            HomeViewModel HomeViewModel = new HomeViewModel();
+            GraphViewModel GraphViewModel = new GraphViewModel();
             HomeService HomeService = new HomeService();
 
-            HomeViewModel.RoomPopulation = HomeService.GetPopulation();
-            Home.Add(HomeViewModel);
+            GraphViewModel.TodaysPopulation = HomeService.GetTodaysPopulation();
+            GraphViewModel.HistoricalPopulation = HomeService.GetHistoricalPopulation();
+            Home.Add(GraphViewModel);
 
             return Content(JsonConvert.SerializeObject(Home), "application/json");
         }
