@@ -67,15 +67,15 @@ namespace RoomQuery.WebAppBuisnessLayer
 
             var todaysStamps = this.Context.Timestamps.Where(x => x.Stamp >= periodStart).ToList();
 
-            while (periodStart.Hour < DateTime.Now.Hour && periodStart.Hour < 18)
+            while (periodStart.Hour <= DateTime.Now.Hour && periodStart.Hour < 18)
             {
                 foreach(SRCTimestamp x in todaysStamps)
                 { 
-                    if(x.Stamp.Hour == periodStart.Hour && x.WasCheckIn)
+                    if(x.Stamp.Hour == periodStart.Hour && x.Stamp <= DateTime.Now && x.WasCheckIn)
                     {
                         popCounter++;
                     }
-                    else if(x.Stamp.Hour == periodStart.Hour && !x.WasCheckIn)
+                    else if(x.Stamp.Hour == periodStart.Hour && x.Stamp <= DateTime.Now && !x.WasCheckIn)
                     {
                         popCounter--;
                     }

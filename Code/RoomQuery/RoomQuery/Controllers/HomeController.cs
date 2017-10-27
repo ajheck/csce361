@@ -46,13 +46,15 @@ namespace RoomQuery.Controllers
             HomeService HomeService = new HomeService();
 
             var TodayPop = HomeService.GetTodaysPopulation();
+            int i = 0;
             var HistPop = HomeService.GetHistoricalPopulation();
 
             foreach (var Point in HistPop)
             {
                 GraphViewModel AviewModel = new GraphViewModel();
                 AviewModel.HistoricalPopulation = Point;
-                //AviewModel.GraphLabel = "a";
+                AviewModel.TodaysPopulation = (i < TodayPop.Count ? TodayPop.ElementAt(i) : -1);
+                i++;
                 Home.Add(AviewModel);
             }
 

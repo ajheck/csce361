@@ -1,7 +1,6 @@
 ﻿
     // Global Options
-    Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontSize = 12;
     Chart.defaults.global.defaultFontColor = '#777';
 
     var studPopChart = {
@@ -43,7 +42,16 @@
                 }
             },
             scales: {
-                yAxes: [{ id: 'y-axis-1', type: 'linear', position: 'left', ticks: { min: 0, max: 50 } }]
+                yAxes: [{
+                    id: 'y-axis-1',
+                    type: 'linear',
+                    position: 'left',
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 5,
+                        max: 100
+                    }
+                }]
             },
             layout: {
                 padding: {
@@ -60,9 +68,16 @@
     };
 
     $.getJSON("/Home/GetData/", function (data) {
+
+        studPopChart.datasets[0].data.push(0);
+        studPopChart.datasets[1].data.push(0);
+
         $.each(data, function (i, item) {
-            studPopChart.datasets[0].data.push(data.length);
-           // studPopChart.labels.push(item.label);
+            if (item.TodaysPopulation >= 0) {
+                studPopChart.datasets[0].data.push(item.TodaysPopulation);
+            }
+
+            studPopChart.datasets[1].data.push(item.HistoricalPopulation);
         })
 
         studPopChart.labels.push("9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM");

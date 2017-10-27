@@ -17,92 +17,74 @@
     <h1><font size="50"><b>Room Query</b></font></h1>
 
 </div>
-
-<div class="container">
-    <canvas id="myChart"></canvas>
-</div>
-
-<div>
-    The current SRC population is: @Model.Population
-</div>
-
-<div>
-    The current TA population is: @Model.ActiveOfficeHours.Count()
-</div>
-
-
 <body>
+    <div class="row">
+        <div class="col-lg-7">
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="col-lg-5">
+
     @{if (Model.ActiveOfficeHours.Count() == 0)
         {
-            <font size ="4"><b>TAs currently in the SRC</b></font>
-        <div>
-            There are no TAs currently in the SRC
-        </div>
+            <p><font size="4"><b>There are no TAs currently in the SRC</b></font></p>
         }
         else
         {
-        <table border="2" style='border-collapse: collapse; border-spacing: 10px; padding-left: 10px;'>
-            <colgroup>
-                <col span="1" style="width: 100px;">
-                <col span="1" style="width: 100px;">
-                <col span="1" style="width: 85px;">
-                <col span="1" style="width: 150px;">
-            </colgroup>
-            <font size="4"><b>TAs currently in the SRC</b></font>
-            <tr>
-                <th class="text-center">Course</th>
-                <th class="text-center">Name</th>
-                <th class="text-center">Day</th>
-                <th class="text-center">Time</th>
-            </tr>
-            @foreach (var hour in Model.ActiveOfficeHours)
-                {
-                    string[] start = @hour.Start.ToString().Split(' ');
-                    string[] end = @hour.End.ToString().Split(' ');
-                    string[] startTime = @start[1].Split(':');
-                    string[] endTime = @end[1].Split(':');
-
-                <tr style="text-align:center">
-                    <td>@hour.Course.CourseNumber</td>
-                    <td>@hour.Student.FirstName @hour.Student.LastName</td>
-                    <td>@hour.Start.DayOfWeek</td>
-                    <td>@startTime[0]:@startTime[1] @start[2] - @endTime[0]:@endTime[1] @end[2]</td>
-                </tr>
-            }
-        </table>
+            <font size="4"><b>Current Office Hours</b></font>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Name</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hour in Model.ActiveOfficeHours)
+                    {
+                        <tr>
+                            <td>@hour.Course.CourseNumber</td>
+                            <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                            <td>@hour.Start.DayOfWeek</td>
+                            <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     }
 
-
-    <table border="2" style='border-collapse: collapse; border-spacing: 10px; padding-left: 10px;'>
-        <colgroup>
-            <col span="1" style="width: 100px;">
-            <col span="1" style="width: 100px;">
-            <col span="1" style="width: 85px;">
-            <col span="1" style="width: 150px;">
-        </colgroup>
-        <font size="4"><b>TA schedule for the week</b></font>
-        <tr>
-            <th class="text-center">Course</th>
-            <th class="text-center">Name</th>
-            <th class="text-center">Day</th>
-            <th class="text-center">Time</th>
-        </tr>
-            @foreach (var hour in Model.WeeklyOfficeHours)
-            {
-                string[] start = @hour.Start.ToString().Split(' ');
-                string[] end = @hour.End.ToString().Split(' ');
-                string[] startTime = @start[1].Split(':');
-                string[] endTime = @end[1].Split(':');
-
-                <tr style="text-align:center">
-                    <td>@hour.Course.CourseNumber</td>
-                    <td>@hour.Student.FirstName @hour.Student.LastName</td>
-                    <td>@hour.Start.DayOfWeek</td>
-                    <td>@startTime[0]:@startTime[1] @start[2] - @endTime[0]:@endTime[1] @end[2]</td>
-                </tr>
-            }
-    </table>
+            <font size="4"><b>Weekly Office Hours</b></font>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Name</th>
+                        <th>Day</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var hour in Model.WeeklyOfficeHours)
+                    {
+                        <tr>
+                            <td>@hour.Course.CourseNumber</td>
+                            <td>@hour.Student.FirstName @hour.Student.LastName</td>
+                            <td>@hour.Start.DayOfWeek</td>
+                            <td>@hour.Start.ToShortTimeString() - @hour.End.ToShortTimeString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <font size="4">There are currently @Model.Population students in the SRC.</font>
+        </div>
+    </div>
 </body>
 
 @section Scripts {

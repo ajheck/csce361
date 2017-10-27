@@ -23,18 +23,22 @@ namespace RoomQuery.DataCollectionBuisnessLayer
         public void HandleScan(String n)
         {
             var student = this.GetStudents().FirstOrDefault(x => x.Nuid == n);
-            student.InSRC = !student.InSRC;
-            this.GetStudents().FirstOrDefault(x => x.StudentID == student.StudentID).InSRC = student.InSRC;
 
-            this.Context.SaveChanges();
+            if (student != null)
+            {
+                student.InSRC = !student.InSRC;
+                this.GetStudents().FirstOrDefault(x => x.StudentID == student.StudentID).InSRC = student.InSRC;
 
-            SRCTimestamp newStamp = new SRCTimestamp();
-            newStamp.Stamp = DateTime.Now;
-            newStamp.Student = student;
-            newStamp.WasCheckIn = student.InSRC;
-            this.Context.Timestamps.Add(newStamp);
+                this.Context.SaveChanges();
 
-            this.Context.SaveChanges();
+                SRCTimestamp newStamp = new SRCTimestamp();
+                newStamp.Stamp = DateTime.Now;
+                newStamp.Student = student;
+                newStamp.WasCheckIn = student.InSRC;
+                this.Context.Timestamps.Add(newStamp);
+
+                this.Context.SaveChanges();
+            }
         }
     }
 }
