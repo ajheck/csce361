@@ -48,9 +48,16 @@ namespace RoomQuery.Migrations
                 new Student {Nuid="24242424",    FirstName = "Seamus",      LastName="Reck",        InSRC = false,      IsTA = false    },
                 new Student {Nuid="25252525",    FirstName = "Josh",        LastName="Peck",        InSRC = false,      IsTA = false    },
                 new Student {Nuid="26262626",    FirstName = "Danny",       LastName="Reck",        InSRC = false,      IsTA = false    },
-                new Student {Nuid="27272727",    FirstName = "Fred",        LastName="Keck",        InSRC = false,      IsTA = false    }
-            };
+                new Student {Nuid="27272727",    FirstName = "Fred",        LastName="Keck",        InSRC = false,      IsTA = false    },
 
+                //added more information for better curve into 155A class
+                new Student {Nuid="60178196",    FirstName = "George",      LastName="Keck",        InSRC = false,      IsTA = false    },
+                new Student {Nuid="00232665",    FirstName = "Bill",        LastName="Keck",        InSRC = false,      IsTA = false    },
+                new Student {Nuid="06583830",    FirstName = "Ronald",      LastName="Keck",        InSRC = false,      IsTA = false    },
+                new Student {Nuid="10640229",    FirstName = "Jimmy",       LastName="Keck",        InSRC = false,      IsTA = false    },
+                new Student {Nuid="72939525",    FirstName = "Jarold",      LastName="Keck",        InSRC = false,      IsTA = false    },
+                new Student {Nuid="19221782",    FirstName = "Richard",     LastName="Keck",        InSRC = false,      IsTA = false    }
+            };
 
             students.ForEach(s => context.Students.Add(s));
             context.SaveChanges();

@@ -16,6 +16,9 @@
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
+                backgroundColor: 'red',
+                fill: false,
+                borderColor: "pink",
             },
 		    {
                 label:'Typical Usage',
@@ -26,39 +29,12 @@
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
+                backgroundColor: 'blue',
+                fill: false,
+                borderColor: "lightBlue",
 		    }
         ],
-        options: {
-            title: {
-                display: true,
-                text: 'Student Population in the SRC',
-                fontSize: 25
-            },
-            multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>",
-            scales: {
-                yAxes: [{
-                    id: 'y-axis-1',
-                    type: 'linear',
-                    position: 'left',
-                    ticks: {
-                        beginAtZero: true,
-                        stepSize: 5,
-                        max: 100
-                    }
-                }]
-            },
-            layout: {
-                padding: {
-                    left: 50,
-                    right: 0,
-                    bottom: 0,
-                    top: 0
-                }
-            },
-            tooltips: {
-                enabled: true
-            }
-        }
+        
     };
 
     $.getJSON("/Home/GetData/", function (data) {
@@ -80,7 +56,8 @@
         var myLineChart = new Chart(ctx,
             {
                 type: 'line',
-                data: studPopChart
+                data: studPopChart,
+               
             });
     });
 

@@ -63,11 +63,10 @@ namespace RoomQuery.WebAppBuisnessLayer
             List<int> result = new List<int>();
             int popCounter = 0;
             DateTime periodStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
-           
 
             var todaysStamps = this.Context.Timestamps.Where(x => x.Stamp >= periodStart).ToList();
 
-            while (periodStart.Hour <= DateTime.Now.Hour && periodStart.Hour < 18)
+            while (periodStart.Hour <= DateTime.Now.Hour && periodStart.Hour < 19)
             {
                 foreach(SRCTimestamp x in todaysStamps)
                 { 
