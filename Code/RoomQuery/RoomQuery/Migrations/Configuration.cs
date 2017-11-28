@@ -6,6 +6,7 @@ namespace RoomQuery.Migrations
     using System.Linq;
     using RoomQuery.Models;
     using System.Collections.Generic;
+    using Microsoft.AspNet.Identity;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RoomQuery.Models.ApplicationDbContext>
     {
@@ -281,6 +282,18 @@ namespace RoomQuery.Migrations
             context.Professors.Add(prof);
 
             context.SaveChanges();
+
+            /* ------------------------------- Users & Admins ------------------------------- */
+            var passwordHash = new PasswordHasher();
+            string password = passwordHash.HashPassword("1234");
+            context.Users.AddOrUpdate(u => u.UserName,
+                new ApplicationUser
+                {
+                    UserName = "Admin1234",
+                    PasswordHash = password,
+                    PhoneNumber = "1231231234"
+
+                });
 
 
         }
