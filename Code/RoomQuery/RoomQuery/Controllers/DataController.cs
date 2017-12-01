@@ -9,6 +9,7 @@ namespace RoomQuery.Controllers
 {
     public class DataController : Controller
     {
+
         private string model;
 
         public ActionResult InsertData()

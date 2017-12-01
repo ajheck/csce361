@@ -290,6 +290,7 @@ namespace RoomQuery.Migrations
                 new ApplicationUser
                 {
                     UserName = "Admin1234",
+                    Email = "admin1@gmail.com",
                     PasswordHash = password,
                     PhoneNumber = "1231231234"
 

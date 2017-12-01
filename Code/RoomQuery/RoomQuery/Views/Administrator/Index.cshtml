@@ -5,3 +5,36 @@
 
 <h2>Adminiatrator</h2>
 
+
+<font size="8"><b>For the Admin Page</b></font>
+<form action="/Administrator/changeTAStatus" method="POST">
+    <p>
+        <label for="nuid">NUID:</label>
+        <input type="text" name="nuid" />
+    </p>
+    <p>
+        <input type="submit" value="Modify TA Status" />
+    </p>
+</form>
+
+<form action="/Administrator/addTA" method="POST">
+    <p>
+        <label for="nuid">NUID:</label>
+        <input type="text" name="nuid" />
+    </p>
+    <p>
+        <label for="hourStart">Office Hour Start Time:</label>
+        <input type="text" name="hourStart" />
+    </p>
+    <p>
+        <label for="hourEnd">Offic Hour End Time:</label>
+        <input type="text" name="hourEnd" />
+    </p>
+    <p>
+        <label for="courseNum">Course Number:</label>
+        <input type="text" name="courseNum" />
+    </p>
+    <p>
+        <input type="submit" value="Add TA" />
+    </p>
+</form>
