@@ -147,4 +147,168 @@
             window.myBar.update();
         });
     </script>
+
+
+    <form action="/Professor/modifyOfficeHours" method="POST">
+        <p>
+            <label for="nuid">NUID:</label>
+            <input type="text" name="nuid" />
+        </p>
+        <p>
+            <label for="courseNum">Course Number:</label>
+            <select name="courseNum">
+                <option value="CSCE 155A">CSCE 155A</option>
+                <option value="CSCE 230">CSCE 230</option>
+                <option value="CSCE 361">CSCE 361</option>
+            </select>
+        </p>
+        <p><b>Current Office Hour Information:</b></p>
+        <p>
+            <label for="origDayOfWeek">Day of Week:</label>
+            <select name="origDayOfWeek">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+            </select>
+        </p>
+        <p>
+            <label for="origHourStart">Office Hour Start Time:</label>
+            <select name="origHourStart">
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+            <b>:</b>
+            <select name="origMinStart">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </p>
+        <p>
+            <label for="origHourEnd">Office Hour End Time:</label>
+            <select name="origHourEnd">
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+            <b>:</b>
+            <select name="origMinEnd">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </p>
+        <p><b>Modified Office Hour Information:</b></p>
+        <p>
+            <label for="modDayOfWeek">Day of Week:</label>
+            <select name="modDayOfWeek">
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+            </select>
+        </p>
+        <p>
+            <label for="modHourStart">Office Hour Start Time:</label>
+            <select name="modHourStart">
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+            <b>:</b>
+            <select name="modMinStart">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </p>
+        <p>
+            <label for="modHourEnd">Office Hour End Time:</label>
+            <select name="modHourEnd">
+                <option value="9">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+            </select>
+            <b>:</b>
+            <select name="modMinEnd">
+                <option value="0">00</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Modify Office Hour" />
+        </p>
+    </form>
+
+
+
 </body>

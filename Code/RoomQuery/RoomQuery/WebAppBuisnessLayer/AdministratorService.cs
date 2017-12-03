@@ -14,6 +14,7 @@ namespace RoomQuery.WebAppBuisnessLayer
         {
             return Context.Students.Where(x => x != null);
         }
+
         public IEnumerable<Course> GetCourses()
         {
             return Context.Courses.Where(x => x != null);
@@ -32,23 +33,63 @@ namespace RoomQuery.WebAppBuisnessLayer
             }
         }
 
-        public void AddTA(string n, string start, string end, string c)
+        public void AddTA(string nuid, string dayOfWeek, int hourStart, int minStart, int hourEnd, int minEnd, string courseNum)
         {
-            var student = this.GetStudents().FirstOrDefault(x => x.Nuid == n);
-            var course = this.GetCourses().Where(x => x.CourseNumber == c).FirstOrDefault();
+            var s = this.GetStudents().FirstOrDefault(x => x.Nuid == nuid);
+            var c = this.GetCourses().Where(x => x.CourseNumber == courseNum).FirstOrDefault();
 
-            if (student != null && course != null)
+            if (s != null && c != null)
             {
-                OfficeHour newOfficeHour = new OfficeHour();
-                newOfficeHour.Course = course;
-                newOfficeHour.Student = student;
-                newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 11, 0, 0).AddDays(1);
-                newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 11, 0, 0).AddDays(1).AddHours(2);
-                this.Context.OfficeHours.Add(newOfficeHour);
+                if (dayOfWeek.Equals("Monday"))
+                {
+                    OfficeHour newOfficeHour = new OfficeHour();
+                    newOfficeHour.Course = c;
+                    newOfficeHour.Student = s;
+                    newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 4, hourStart, minStart, 0);
+                    newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 4, hourEnd, minEnd, 0);
+                    this.Context.OfficeHours.Add(newOfficeHour);
+                }
+                else if (dayOfWeek.Equals("Tuesday"))
+                {
+                    OfficeHour newOfficeHour = new OfficeHour();
+                    newOfficeHour.Course = c;
+                    newOfficeHour.Student = s;
+                    newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 5, hourStart, minStart, 0);
+                    newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 5, hourEnd, minEnd, 0);
+                    this.Context.OfficeHours.Add(newOfficeHour);
+                }
+                else if (dayOfWeek.Equals("Wednesday"))
+                {
+                    OfficeHour newOfficeHour = new OfficeHour();
+                    newOfficeHour.Course = c;
+                    newOfficeHour.Student = s;
+                    newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 6, hourStart, minStart, 0);
+                    newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 6, hourEnd, minEnd, 0);
+                    this.Context.OfficeHours.Add(newOfficeHour);
+                }
+                else if (dayOfWeek.Equals("Thursday"))
+                {
+                    OfficeHour newOfficeHour = new OfficeHour();
+                    newOfficeHour.Course = c;
+                    newOfficeHour.Student = s;
+                    newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 7, hourStart, minStart, 0);
+                    newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 7, hourEnd, minEnd, 0);
+                    this.Context.OfficeHours.Add(newOfficeHour);
+                }
+                else if (dayOfWeek.Equals("Friday"))
+                {
+                    OfficeHour newOfficeHour = new OfficeHour();
+                    newOfficeHour.Course = c;
+                    newOfficeHour.Student = s;
+                    newOfficeHour.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 8, hourStart, minStart, 0);
+                    newOfficeHour.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 8, hourEnd, minEnd, 0);
+                    this.Context.OfficeHours.Add(newOfficeHour);
+                }
 
                 this.Context.SaveChanges();
 
             }
         }
+
     }
 }

@@ -11,6 +11,7 @@ namespace RoomQuery.Controllers
     public class AdministratorController : Controller
     {
         private string model;
+
         // GET: Administrator
         public ActionResult Index()
         {
@@ -23,16 +24,16 @@ namespace RoomQuery.Controllers
             AdministratorService AdministratorService = new AdministratorService();
             AdministratorService.ModifyTAStatus(nuid);
 
-            return View();
+            return View("Index", model);
         }
 
         [HttpPost]
-        public ActionResult addTA(string nuid, string hourStart, string hourEnd, string courseNum)
+        public ActionResult addTA(string nuid, string dayOfWeek, string hourStart, string minStart, string hourEnd, string minEnd, string courseNum)
         {
             AdministratorService AdministratorService = new AdministratorService();
-            AdministratorService.AddTA(nuid, hourStart, hourEnd, courseNum);
+            AdministratorService.AddTA(nuid, dayOfWeek, Convert.ToInt32(hourStart), Convert.ToInt32(minStart), Convert.ToInt32(hourEnd), Convert.ToInt32(minEnd), courseNum);
 
-            return View();
+            return View("Index", model);
         }
     }
 }

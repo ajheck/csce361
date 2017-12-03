@@ -5,8 +5,6 @@
 
 <h2>Adminiatrator</h2>
 
-
-<font size="8"><b>For the Admin Page</b></font>
 <form action="/Administrator/changeTAStatus" method="POST">
     <p>
         <label for="nuid">NUID:</label>
@@ -23,16 +21,82 @@
         <input type="text" name="nuid" />
     </p>
     <p>
-        <label for="hourStart">Office Hour Start Time:</label>
-        <input type="text" name="hourStart" />
+        <label for="dayOfWeek">Day of Week:</label>
+        <select name="dayOfWeek">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+        </select>
     </p>
     <p>
-        <label for="hourEnd">Offic Hour End Time:</label>
-        <input type="text" name="hourEnd" />
+        <label for="hourStart">Office Hour Start Time:</label>
+        <select name="hourStart">
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+        </select>
+        <b>:</b>
+        <select name="minStart">
+            <option value="0">00</option>
+            <option value="5">05</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+        </select>
+    </p>
+    <p>
+        <label for="hourEnd">Office Hour End Time:</label>
+        <select name="hourEnd">
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+        </select>
+        <b>:</b>
+        <select name="minEnd">
+            <option value="0">00</option>
+            <option value="5">05</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+        </select>
     </p>
     <p>
         <label for="courseNum">Course Number:</label>
-        <input type="text" name="courseNum" />
+        <select name="courseNum">
+            <option value="CSCE 155">CSCE 155A</option>
+            <option value="CSCE 230">CSCE 230</option>
+            <option value="CSCE 361">CSCE 361</option>
+        </select>
     </p>
     <p>
         <input type="submit" value="Add TA" />
