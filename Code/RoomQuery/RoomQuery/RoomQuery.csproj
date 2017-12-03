@@ -229,6 +229,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ProfessorViewModels.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\OfficeHour.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WebAppBuisnessLayer\ProfessorService.cs" />
     <Compile Include="WebAppBuisnessLayer\HomeService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +323,8 @@
     <Content Include="Views\Data\InsertData.cshtml" />
     <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Professor\Index.cshtml" />
+    <Content Include="Scripts\numStudentsWeek.js" />
+    <Content Include="Views\Professor\data" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
