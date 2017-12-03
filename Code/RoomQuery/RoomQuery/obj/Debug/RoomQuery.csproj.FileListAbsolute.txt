@@ -232,3 +232,4 @@ C:\git\cse361\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.Migrations.In
 C:\git\cse361\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.csproj.GenerateResource.Cache
 C:\git\cse361\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.dll
 C:\git\cse361\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.pdb
+C:\git\csce361\Code\RoomQuery\RoomQuery\obj\Debug\RoomQuery.Migrations.UpdateProfessor.resources

@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Linq;
 
 namespace RoomQuery.Models
 {
@@ -14,8 +15,24 @@ namespace RoomQuery.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+
+            ApplicationDbContext Context = ApplicationDbContext.Create();
+
+            string currentEmail = userIdentity.GetUserName().ToString();
+
+            if (Context.Professors.Where(x => x.Email.Equals(currentEmail)).FirstOrDefault() != null)
+            {
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Professor"));
+            }
+            else
+            {
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+            }
+
             return userIdentity;
         }
+
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
