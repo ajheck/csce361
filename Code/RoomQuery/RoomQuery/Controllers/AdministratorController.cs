@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace RoomQuery.Controllers
 {
+    [Authorize (Roles = "Admin")]
     public class AdministratorController : Controller
     {
         private string model;

@@ -7,6 +7,9 @@ namespace RoomQuery.Migrations
     using RoomQuery.Models;
     using System.Collections.Generic;
     using Microsoft.AspNet.Identity;
+    using System.Web.Security;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Security.Claims;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RoomQuery.Models.ApplicationDbContext>
     {
@@ -19,6 +22,16 @@ namespace RoomQuery.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            
+            if (!roleManager.RoleExists("Admin"))
+            {
+                roleManager.Create(new IdentityRole("Admin"));
+            }
+            if (!roleManager.RoleExists("Professor"))
+            {
+                roleManager.Create(new IdentityRole("Professor"));
+            }
 
             /* ------------------------------- Students ------------------------------- */
 
@@ -276,7 +289,8 @@ namespace RoomQuery.Migrations
                 Courses = context.Courses.Where(x => x.CourseNumber == "CSCE 361").ToList(),
                 PassHash = 0x0,
                 FirstName = "Greg",
-                LastName = "Rothermel"
+                LastName = "Rothermel",
+                Email = "Greg.Rothermel@unl.edu"
             };
 
             context.Professors.Add(prof);
@@ -284,19 +298,22 @@ namespace RoomQuery.Migrations
             context.SaveChanges();
 
             /* ------------------------------- Users & Admins ------------------------------- */
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var passwordHash = new PasswordHasher();
-            string password = passwordHash.HashPassword("1234");
-            context.Users.AddOrUpdate(u => u.UserName,
-                new ApplicationUser
+
+            if(!context.Users.Any(u => u.UserName == "Admin1234"))
+            {
+                string password = passwordHash.HashPassword("Password@1234");
+                var user = new ApplicationUser
                 {
-                    UserName = "Admin1234",
+                    UserName = "admin1@gmail.com",
                     Email = "admin1@gmail.com",
-                    PasswordHash = password,
-                    PhoneNumber = "1231231234"
-
-                });
-
-
+                    PhoneNumber = "1231231234",
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                UserManager.Create(user, "Password@1234");
+                
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace RoomQuery.Controllers
 {
+    [Authorize(Roles = "Professor")]
     public class ProfessorController : Controller
     {
         // GET: Professor

@@ -18,13 +18,15 @@ namespace RoomQuery.Models
 
             ApplicationDbContext Context = ApplicationDbContext.Create();
 
-            if (Context.Professors.Where(x => x.Nuid == userIdentity.Name).ToArray().Length == 1)
+            string currentEmail = userIdentity.GetUserName().ToString();
+
+            if (Context.Professors.Where(x => x.Email.Equals(currentEmail)).FirstOrDefault() != null)
             {
-                userIdentity.AddClaim(new Claim("UserType", "Prof"));
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Professor"));
             }
             else
             {
-                userIdentity.AddClaim(new Claim("UserType", "Admin"));
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
             }
 
             return userIdentity;

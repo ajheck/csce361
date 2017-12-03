@@ -219,6 +219,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfessorController.cs" />
+    <Compile Include="Migrations\201712022133078_UpdateProfessor.cs" />
+    <Compile Include="Migrations\201712022133078_UpdateProfessor.Designer.cs">
+      <DependentUpon>201712022133078_UpdateProfessor.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebAppBuisnessLayer\AdministratorService.cs" />
     <Compile Include="WebAppBuisnessLayer\DataService.cs" />
     <Compile Include="Global.asax.cs">
@@ -335,6 +339,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710240157125_InitDatabase.resx">
       <DependentUpon>201710240157125_InitDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712022133078_UpdateProfessor.resx">
+      <DependentUpon>201712022133078_UpdateProfessor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
