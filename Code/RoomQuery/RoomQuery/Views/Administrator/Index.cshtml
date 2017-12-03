@@ -3,7 +3,7 @@
     ViewBag.Title = "Administrator";
 }
 
-<h2>Adminiatrator</h2>
+<h2>Administrator</h2>
 
 <form action="/Administrator/changeTAStatus" method="POST">
     <p>
@@ -102,3 +102,14 @@
         <input type="submit" value="Add TA" />
     </p>
 </form>
+
+<p>&nbsp;</p>
+<p>
+    Enter properly formatted multi-line timestamp data into the text box to populate
+    the database with mock historical data.
+</p>
+<form action="/Data/BulkUpload" method="POST">
+    <input type="text" name="dataString" />
+    <input type="submit" value="Upload Data" />
+</form>
+

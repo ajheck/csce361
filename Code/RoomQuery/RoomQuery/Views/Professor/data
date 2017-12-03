@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Proffessor Data";
+}
+
+<h2>Professor Data</h2>
+
+
+<head>
+    
+</head>
+
+<body>
+    
+</body>

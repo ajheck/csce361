@@ -84,7 +84,6 @@ namespace RoomQuery.WebAppBuisnessLayer
 
                 periodStart = periodStart.AddHours(1.0);
             }
-
             return result;
         }
 
@@ -165,7 +164,7 @@ namespace RoomQuery.WebAppBuisnessLayer
         }
 
         /*
-         * Return all office hours which are currently happneing and that have a TA present
+         * Return all office hours which are currently happening and that have a TA present
          */
         public IEnumerable<OfficeHour> GetActiveOfficeHours()
         {

@@ -19,5 +19,6 @@ namespace RoomQuery.Models
         [Column(TypeName = "VARCHAR")]
         [StringLength(128)]
         public string CourseName { get; set; }
+        public virtual Professor Professor { get; set; }
     }
 }
