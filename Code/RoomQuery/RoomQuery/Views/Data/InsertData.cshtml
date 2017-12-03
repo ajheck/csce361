@@ -7,6 +7,9 @@
     Enter an NUID into the text box to indicate the student has scanned their Ncard at the SRC.
 </p>
 <form action="/Data/Submit" method="POST">
-    <input type="text" name="nuid" />
-    <input type="submit" value="Scan Ncard" />
+    <div class="form-group">
+        <input type="text" class="form-control" name="nuid" />
+    </div>
+
+    <button class="btn btn-default" type="submit" value="Scan Ncard">Submit</button>
 </form>

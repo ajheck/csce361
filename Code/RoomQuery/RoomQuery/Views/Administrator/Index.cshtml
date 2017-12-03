@@ -6,60 +6,61 @@
 <h2>Administrator</h2>
 
 <form action="/Administrator/changeTAStatus" method="POST">
-    <p>
+    <div class="form-group">
         <label for="nuid">NUID:</label>
-        <input type="text" name="nuid" />
-    </p>
-    <p>
-        <input type="submit" value="Modify TA Status" />
-    </p>
+        <input type="text" class="form-control" name="nuid" />
+    </div>
+    <button class="btn btn-default" type="submit" value="Scan Ncard">Modify TA status</button>
 </form>
 
+<br />
+
 <form action="/Administrator/addTA" method="POST">
-    <p>
+    <div class="form-group">
         <label for="nuid">NUID:</label>
-        <input type="text" name="nuid" />
-    </p>
-    <p>
+        <input type="text" class="form-control" name="nuid" />
+     </div>
+    <div class="form-group">
         <label for="dayOfWeek">Day of Week:</label>
-        <select name="dayOfWeek">
+        <select name="dayOfWeek" class="form">
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
             <option value="Wednesday">Wednesday</option>
             <option value="Thursday">Thursday</option>
             <option value="Friday">Friday</option>
         </select>
-    </p>
-    <p>
-        <label for="hourStart">Office Hour Start Time:</label>
-        <select name="hourStart">
-            <option value="9">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-        </select>
-        <b>:</b>
-        <select name="minStart">
-            <option value="0">00</option>
-            <option value="5">05</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-            <option value="35">35</option>
-            <option value="40">40</option>
-            <option value="45">45</option>
-            <option value="50">50</option>
-            <option value="55">55</option>
-        </select>
-    </p>
+    </div>
+    <div class="form-group">
+    <label for="hourStart">Office Hour Start Time:</label>
+    <select name="hourStart">
+        <option value="9">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+    </select>
+    <b>:</b>
+    <select name="minStart">
+        <option value="0">00</option>
+        <option value="5">05</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="35">35</option>
+        <option value="40">40</option>
+        <option value="45">45</option>
+        <option value="50">50</option>
+        <option value="55">55</option>
+    </select>
+    </div>
+
     <p>
         <label for="hourEnd">Office Hour End Time:</label>
         <select name="hourEnd">
@@ -99,7 +100,7 @@
         </select>
     </p>
     <p>
-        <input type="submit" value="Add TA" />
+        <button class="btn btn-default" type="submit" value="Add TA">Create Office Hours</button>
     </p>
 </form>
 
@@ -109,7 +110,9 @@
     the database with mock historical data.
 </p>
 <form action="/Data/BulkUpload" method="POST">
-    <input type="text" name="dataString" />
-    <input type="submit" value="Upload Data" />
+    <div class="form-group">
+        <input type="text" class="form-control" name="dataString" />
+    </div>
+    <button class="btn btn-default" type="submit" value="Upload Data">Upload Data</button>
 </form>
 
