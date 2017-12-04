@@ -94,7 +94,7 @@
     <p>
         <label for="courseNum">Course Number:</label>
         <select name="courseNum">
-            <option value="CSCE 155">CSCE 155A</option>
+            <option value="CSCE 155A">CSCE 155A</option>
             <option value="CSCE 230">CSCE 230</option>
             <option value="CSCE 361">CSCE 361</option>
         </select>
@@ -109,10 +109,9 @@
     Enter properly formatted multi-line timestamp data into the text box to populate
     the database with mock historical data.
 </p>
-<form action="/Data/BulkUpload" method="POST">
-    <div class="form-group">
-        <input type="text" class="form-control" name="dataString" />
-    </div>
+<form action="/Administrator/BulkUpload" method="POST">
+   
+        <input type="text" name="dataString" />
     <button class="btn btn-default" type="submit" value="Upload Data">Upload Data</button>
 </form>
 

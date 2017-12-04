@@ -213,5 +213,50 @@ namespace RoomQuery.WebAppBuisnessLayer
 
             return result; //A list containing the number of students that used the SRC, for each week
         }
+
+        public void ModifyHours(string nuid, string origDayOfWeek, int origHourStart, int origMinStart, int origHourEnd, int origMinEnd,
+            string modDayOfWeek, int modHourStart, int modMinStart, int modHourEnd, int modMinEnd, string courseNum)
+        {
+            foreach (var h in this.Context.OfficeHours.Where(x => x.Student.Nuid == nuid
+                                                        && x.Course.CourseNumber.Equals(courseNum)
+                                                        && x.Start.Hour == origHourStart
+                                                        && x.Start.Minute == origMinStart
+                                                        && x.End.Hour == origHourEnd
+                                                        && x.End.Minute == origMinEnd).ToArray())
+            {
+                if (h != null && h.Start.DayOfWeek.ToString().Equals(origDayOfWeek))
+                {
+                    if (modDayOfWeek.Equals("Monday"))
+                    {
+                        h.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 4, modHourStart, modMinStart, 0);
+                        h.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 4, modHourEnd, modMinEnd, 0);
+                    }
+                    else if (modDayOfWeek.Equals("Tuesday"))
+                    {
+                        h.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 5, modHourStart, modMinStart, 0);
+                        h.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 5, modHourEnd, modMinEnd, 0);
+                    }
+                    else if (modDayOfWeek.Equals("Wednesday"))
+                    {
+                        h.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 6, modHourStart, modMinStart, 0);
+                        h.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 6, modHourEnd, modMinEnd, 0);
+                    }
+                    else if (modDayOfWeek.Equals("Thursday"))
+                    {
+                        h.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 7, modHourStart, modMinStart, 0);
+                        h.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 7, modHourEnd, modMinEnd, 0);
+                    }
+                    else if (modDayOfWeek.Equals("Friday"))
+                    {
+                        h.Start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 8, modHourStart, modMinStart, 0);
+                        h.End = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 8, modHourEnd, modMinEnd, 0);
+                    }
+
+                    this.Context.SaveChanges();
+                }
+            }
+        }
     }
+
+
 }

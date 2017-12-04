@@ -194,88 +194,88 @@ namespace RoomQuery.Migrations
              */
 
             // Select all the students in CSCE 155A and have them checked in during Andy's CSCE 155A office hours
-            foreach (Student s in csce155a.Roster)
-            {
-                var timestamp = new SRCTimestamp
-                {
-                    Student = s,
-                    WasCheckIn = true,
-                    Stamp = DateTime.Now
-                };
+            //foreach (Student s in csce155a.Roster)
+            //{
+            //    var timestamp = new SRCTimestamp
+            //    {
+            //        Student = s,
+            //        WasCheckIn = true,
+            //        Stamp = DateTime.Now
+            //    };
 
-                context.Timestamps.Add(timestamp);
+            //    context.Timestamps.Add(timestamp);
 
-                context.Students.Where(x => x.StudentID == s.StudentID).FirstOrDefault().InSRC = true;
+            //    context.Students.Where(x => x.StudentID == s.StudentID).FirstOrDefault().InSRC = true;
 
-            }
+            //}
 
-            // Check Andy in for his office hours
-            var stamp = new SRCTimestamp
-            {
-                Student = context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault(),
-                WasCheckIn = true,
-                Stamp = DateTime.Now
-            };
+            //// Check Andy in for his office hours
+            //var stamp = new SRCTimestamp
+            //{
+            //    Student = context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault(),
+            //    WasCheckIn = true,
+            //    Stamp = DateTime.Now
+            //};
 
-            context.Timestamps.Add(stamp);
+            //context.Timestamps.Add(stamp);
 
-            context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault().InSRC = true;
+            //context.Students.Where(x => x.Nuid == "11111111").FirstOrDefault().InSRC = true;
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
-            //Create realistic coming and goings for students of 230 for today
-            DateTime checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
-            foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
-            {
-                SRCTimestamp newStamp = new SRCTimestamp();
-                newStamp.Student = s;
-                newStamp.WasCheckIn = true;
-                newStamp.Stamp = checkinTime;
+            ////Create realistic coming and goings for students of 230 for today
+            //DateTime checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            //foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
+            //{
+            //    SRCTimestamp newStamp = new SRCTimestamp();
+            //    newStamp.Student = s;
+            //    newStamp.WasCheckIn = true;
+            //    newStamp.Stamp = checkinTime;
 
-                context.Timestamps.Add(newStamp);
+            //    context.Timestamps.Add(newStamp);
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                DateTime checkoutTime = checkinTime;
-                checkoutTime = checkoutTime.AddHours(.75);
+            //    DateTime checkoutTime = checkinTime;
+            //    checkoutTime = checkoutTime.AddHours(.75);
 
-                newStamp.WasCheckIn = false;
-                newStamp.Stamp = checkoutTime;
+            //    newStamp.WasCheckIn = false;
+            //    newStamp.Stamp = checkoutTime;
 
-                context.Timestamps.Add(newStamp);
+            //    context.Timestamps.Add(newStamp);
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                checkinTime = checkinTime.AddHours(.33);
-            }
+            //    checkinTime = checkinTime.AddHours(.33);
+            //}
 
-            //Create realistic coming and goings for students of 230 for lastWeek
-            checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
-            checkinTime = checkinTime.AddDays(-7.0);
+            ////Create realistic coming and goings for students of 230 for lastWeek
+            //checkinTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            //checkinTime = checkinTime.AddDays(-7.0);
 
-            foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
-            {
-                SRCTimestamp newStamp = new SRCTimestamp();
-                newStamp.Student = s;
-                newStamp.WasCheckIn = true;
-                newStamp.Stamp = checkinTime;
+            //foreach (Student s in context.Students.Where(x => x.LastName == "Reck").ToList())
+            //{
+            //    SRCTimestamp newStamp = new SRCTimestamp();
+            //    newStamp.Student = s;
+            //    newStamp.WasCheckIn = true;
+            //    newStamp.Stamp = checkinTime;
 
-                context.Timestamps.Add(newStamp);
+            //    context.Timestamps.Add(newStamp);
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                DateTime checkoutTime = checkinTime;
-                checkoutTime = checkoutTime.AddHours(1.5);
+            //    DateTime checkoutTime = checkinTime;
+            //    checkoutTime = checkoutTime.AddHours(1.5);
 
-                newStamp.WasCheckIn = false;
-                newStamp.Stamp = checkoutTime;
+            //    newStamp.WasCheckIn = false;
+            //    newStamp.Stamp = checkoutTime;
 
-                context.Timestamps.Add(newStamp);
+            //    context.Timestamps.Add(newStamp);
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                checkinTime = checkinTime.AddHours(.66);
-            }
+            //    checkinTime = checkinTime.AddHours(.66);
+            //}
 
             /* ------------------------------- Professors ------------------------------- */
 
