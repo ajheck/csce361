@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace RoomQuery.Controllers
 {
-    //[Authorize(Roles = "Professor")]
+    [Authorize(Roles = "Professor")]
     public class ProfessorController : Controller
     {
         int courseID = 0;
