@@ -64,15 +64,52 @@ namespace RoomQuery.WebAppBuisnessLayer
         {
             return this.GetCourse().Where(x => x.Professor.Nuid == nuid);   
         }
-        
+
+        /*
+        * For a given professor, return their course
+        */
+        public Course GetCourseByProfessorID2(int id)
+        {
+            return this.Context.Courses.Where(x => x.Professor.ProfessorID == id).FirstOrDefault();
+        }
+
+        /*
+        * For a given email, return the course ID
+        */
+        public int GetCourseByEmail(string email)
+        {
+
+            ProfessorService ProfessorService = new ProfessorService();
+
+            Professor professor = ProfessorService.GetProfessorByEmail(email);
+
+            int nuid = professor.ProfessorID;
+
+            Course course = ProfessorService.GetCourseByProfessorID2(nuid);
+
+            return course.CourseID;
+        }
+
+        /*
+         * For a given email, returns professor
+         */
+        public Professor GetProfessorByEmail(string email)
+        {
+            var professors = Context.Professors.Where(x => x.Email == email);
+
+            Professor professor = professors.First();
+
+            return professor;
+        }
+
         /*
         * For a given course, returns number of hours students spent in SRC each week 
         */
-        public List<int> getClassHoursInSRC(string courseID, DateTime startDate)
+        public List<int> GetClassHoursInSRC(int courseID, DateTime startDate)
         {
             List<int> result = new List<int>(); //List that will contain the number of hours spent by all the students in the class each week
             int timeSpent= 0;
-            Course course = GetCourseByName(courseID);
+            Course course = GetCourseByID(courseID);
 
             var endDate = DateTime.Now;
             endDate = endDate.AddHours(-(endDate.Hour + 1));
@@ -116,10 +153,10 @@ namespace RoomQuery.WebAppBuisnessLayer
                             myStack.Push(s);
                         }else
                         {
-                            if(myStack != null)
+                            if(myStack.Count != 0)
                             {
                                 checkin = myStack.Pop();
-                                difference = s.Stamp.Hour - checkin.Stamp.Hour;
+                                difference = Math.Abs(s.Stamp.Hour - checkin.Stamp.Hour);
                             }
                             timeSpent = timeSpent + difference;
                         }
@@ -131,17 +168,6 @@ namespace RoomQuery.WebAppBuisnessLayer
             }
             return result;
         }
-
-
-        /*
-         * For a given student, returns number of hours the student has spent in the SRC by week
-         */
-         public List<int> getStudentUsage(Student student)
-        {
-            //FIXME
-            return null;
-        }
-
 
         /*
          * For a given class, returns number of students who use SRC for each week
@@ -187,17 +213,5 @@ namespace RoomQuery.WebAppBuisnessLayer
 
             return result; //A list containing the number of students that used the SRC, for each week
         }
-
-
-        /*
-        *  
-        */
-
-
-
-
-
-
-
     }
 }

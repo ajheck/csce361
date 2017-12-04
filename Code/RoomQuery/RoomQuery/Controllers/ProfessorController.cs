@@ -10,16 +10,16 @@ using Newtonsoft.Json;
 
 namespace RoomQuery.Controllers
 {
-    [Authorize(Roles = "Professor")]
+    //[Authorize(Roles = "Professor")]
     public class ProfessorController : Controller
     {
+        int courseID = 0;
+
         // GET: 
         public ActionResult Index()
         {
             HomeService HomeService = new HomeService();
             HomeService.ScrubStaleEntries();
-
-
 
 
             return View();
@@ -34,19 +34,29 @@ namespace RoomQuery.Controllers
         //Given a coursID, return the data for class' SRC usage hours by week
         public ContentResult GetHoursClassUsage()
         {
-            List<HoursChartViewModel> HoursChartVM = new List<HoursChartViewModel>();
-            //ProfessorService ProfessorService = new 
+            List<HoursChartViewModel> HoursChartList = new List<HoursChartViewModel>();
+            ProfessorService ProfessorService = new ProfessorService();
 
-            return null;
+            courseID = ProfessorService.GetCourseByEmail(User.Identity.Name);
+            DateTime startDate = new DateTime (2017, 8, 20);
+
+            var HoursPerWeek = ProfessorService.GetClassHoursInSRC(courseID, startDate);
+
+            foreach(var num in HoursPerWeek)
+            {
+                HoursChartViewModel HoursChartVM = new HoursChartViewModel();
+
+                HoursChartVM.ClassHours = num;
+
+                HoursChartList.Add(HoursChartVM);
+            }
+
+            var hourWeeklyJSON = Content(JsonConvert.SerializeObject(HoursChartList), "application/json");
+
+
+            return hourWeeklyJSON;
         }
 
-        //Given a student, return the data for student
-        public ContentResult GetDataStudentUsage()
-        {
-
-
-            return null;
-        }
 
         //For a given course, return the data for the number of uses the SRC each week
         public ContentResult GetDataNumStudentUsage()
@@ -54,7 +64,9 @@ namespace RoomQuery.Controllers
             List<NumStudentChartViewModel> NumStudentList = new List<NumStudentChartViewModel>();
             ProfessorService ProfessorService = new ProfessorService();
 
-            int courseID = 2; //Temp courseID
+            courseID = ProfessorService.GetCourseByEmail(User.Identity.Name);
+
+
             DateTime startDate = new DateTime (2017, 8, 20); //Beginning of the School year
 
             var NumStudentsPerWeek = ProfessorService.getNumStudentsPerWeek(courseID, startDate);

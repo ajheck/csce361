@@ -23,9 +23,35 @@
 </head>
 
 <body>
+    <center><h1>SRC Population</h1></center>
     <canvas id="myChart"></canvas>
+    <br>
+    <form action="/Home/GetData">
+        <input type="submit" value="Export SRC Week Data" />
+    </form>
+    <br>
+    <br>
+
+    <center><h1>Course SRC Usage by Uses</h1></center>
     <canvas id="numStudentsWeek"></canvas>
+    <br>
+    <form action="/Professor/GetHoursClassUsage">
+        <input type="submit" value="Export Hours Per Week" />
+    </form>
+    <br>
+    <br>
+
+    <center><h1>Course SRC Usage by Hours</h1></center>
+    <canvas id="courseHoursSRCWeek"></canvas>
+    <br>
+    <form action="/Professor/GetDataNumStudentUsage">
+        <input type="submit" value="Export Uses Per Week" />
+    </form>
+    <br>
+    <br>
 </body>
 @section Scripts {
+    @Scripts.Render("~/Scripts/populationChart.js")
     @Scripts.Render("~/Scripts/numStudentsWeek.js")
+    @Scripts.Render("~/Scripts/courseHoursWeek.js")
 }

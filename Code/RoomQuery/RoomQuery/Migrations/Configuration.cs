@@ -295,13 +295,25 @@ namespace RoomQuery.Migrations
 
             context.Professors.Add(prof);
 
+            prof = new Professor
+            {
+                Nuid = "12342988",
+                Courses = context.Courses.Where(x => x.CourseNumber == "CSCE 155a").ToList(),
+                PassHash = 0x0,
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "johndoe@unl.edu"
+            };
+
+            context.Professors.Add(prof);
+
             context.SaveChanges();
 
             /* ------------------------------- Users & Admins ------------------------------- */
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var passwordHash = new PasswordHasher();
 
-            if(!context.Users.Any(u => u.UserName == "Admin1234"))
+            if(!context.Users.Any(u => u.UserName == "admin1@gmail.com"))
             {
                 string password = passwordHash.HashPassword("Password@1234");
                 var user = new ApplicationUser
@@ -313,6 +325,34 @@ namespace RoomQuery.Migrations
                 };
                 UserManager.Create(user, "Password@1234");
                 
+            }
+
+            if (!context.Users.Any(u => u.UserName == "Greg.Rothermel@unl.edu"))
+            {
+                string password = passwordHash.HashPassword("Password@1234");
+                var user = new ApplicationUser
+                {
+                    UserName = "Greg.Rothermel@unl.edu",
+                    Email = "Greg.Rothermel@unl.edu",
+                    PhoneNumber = "1231231234",
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                UserManager.Create(user, "Password@1234");
+
+            }
+
+            if (!context.Users.Any(u => u.UserName == "johndoe@unl.edu"))
+            {
+                string password = passwordHash.HashPassword("Password@1234");
+                var user = new ApplicationUser
+                {
+                    UserName = "johndoe@unl.edu",
+                    Email = "johndoe@unl.edu",
+                    PhoneNumber = "1231231234",
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+                UserManager.Create(user, "Password@1234");
+
             }
         }
     }

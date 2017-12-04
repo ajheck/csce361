@@ -15,9 +15,9 @@ var numStudentsChart = {
 			pointStrokeColor: "#fff",
 			pointHighlightFill: "#fff",
 			pointHighlightStroke: "rgba(151,187,205,1)",
-			backgroundColor: 'red',
+			backgroundColor: 'LightBlue',
 			fill: false,
-			borderColor: "pink",
+			borderColor: "Blue",
 		}
 	],
 
@@ -35,7 +35,7 @@ $.getJSON("/Professor/GetDataNumStudentUsage/", function (data) {
 
 	var myLineChart = new Chart(ctx,
 		{
-			type: 'line',
+			type: 'bar',
 			data: numStudentsChart,
 
 		});
