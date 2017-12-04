@@ -16,12 +16,14 @@ namespace RoomQuery.Controllers
         int courseID = 0;
 
         // GET: 
+        private string model;
+
+        // GET: Professor
         public ActionResult Index()
         {
             HomeService HomeService = new HomeService();
             HomeService.ScrubStaleEntries();
-
-
+            
             return View();
         }
 

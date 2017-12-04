@@ -40,26 +40,5 @@ namespace RoomQuery.DataCollectionBuisnessLayer
                 this.Context.SaveChanges();
             }
         }
-
-        public void BulkInsert(String nuid, int year, int month, int day, int hour, int min, int sec)
-        {
-            var student = this.GetStudents().FirstOrDefault(x => x.Nuid == nuid);
-
-            if (student != null)
-            {
-                student.InSRC = !student.InSRC;
-                this.GetStudents().FirstOrDefault(x => x.StudentID == student.StudentID).InSRC = student.InSRC;
-
-                this.Context.SaveChanges();
-
-                SRCTimestamp newStamp = new SRCTimestamp();
-                newStamp.Stamp = new DateTime(year, month, day, hour, min, sec);
-                newStamp.Student = student;
-                newStamp.WasCheckIn = student.InSRC;
-                this.Context.Timestamps.Add(newStamp);
-
-                this.Context.SaveChanges();
-            }
-        }
     }
 }
